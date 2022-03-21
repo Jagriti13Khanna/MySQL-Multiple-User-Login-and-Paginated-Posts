@@ -1,0 +1,57 @@
+//Validation
+    else
+    {
+        //Email
+        if($email == "")
+        {
+            $valid_email = "<h5>Email is required.</h5>";
+            $is_form_valid = FALSE;
+        }
+        else
+        {
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        }
+
+        //User Name
+        if ($user_name == "") {
+			$userNameValid = "<p class='msg'>Please add your user name.</p>";
+	    }
+        else {
+            $user_name = filter_var($user_name, FILTER_SANITIZE_STRING);
+        }
+        
+        //First Name
+        if ($first_name == "") {
+			$firstNameValid = "<p class='msg'>Please add your first name.</p>";
+	    }
+        else {
+            $first_name = filter_var($first_name, FILTER_SANITIZE_STRING);
+        } 
+
+        //Last Name
+        if ($last_name == "") {
+			$lastNameValid = "<p class='msg'>Please add your last name.</p>";
+	    }
+        else {
+            $last_name = filter_var($last_name, FILTER_SANITIZE_STRING);
+        }
+        
+        //Password
+        if ($password == "") {
+			$passwordValid = "<p class='msg'>Please add your password.</p>";
+	    }
+        else
+        {
+            $password = $_POST['password'];
+         
+            $number = preg_match('@[0-9]@', $password);
+            $uppercase = preg_match('@[A-Z]@', $password);
+            $lowercase = preg_match('@[a-z]@', $password);
+            $specialChars = preg_match('@[^\w]@', $password);
+        
+            if(strlen($password) < 8 || !$number || !$uppercase || !$lowercase || !$specialChars)
+            {
+                $passwordValid = "<p class='msg'>Password must be at least 8 characters in length and must contain at least one number, one upper case letter, one lower case letter and one special character.</p>";
+            } 
+        }
+    }
